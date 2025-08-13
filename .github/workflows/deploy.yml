@@ -26,12 +26,6 @@ jobs:
           key: composer-${{ hashFiles('composer.lock') }}
           restore-keys: composer-
 
-      - name: Install dependencies
-        run: |
-          composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
-        env:
-          COMPOSER_MEMORY_LIMIT: -1
-
       - name: Buat file .env dari GitHub Secret
         run: echo "${{ secrets.LARAVEL_ENV_FILE }}" > .env
 
