@@ -34,16 +34,7 @@ jobs:
 
       - name: Buat file .env dari GitHub Secret
         run: echo "${{ secrets.LARAVEL_ENV_FILE }}" > .env
-
-      - name: Siapkan folder untuk upload
-        run: |
-          mkdir deploy
-          rsync -av --exclude=public ./ deploy/
-          mkdir -p deploy/htdocs
-          cp -r public/* deploy/htdocs/
-          sed -i "s|../vendor/autoload.php|../vendor/autoload.php|g" deploy/htdocs/index.php
-          sed -i "s|../bootstrap/app.php|../bootstrap/app.php|g" deploy/htdocs/index.php
-
+        
       - name: Upload ke InfinityFree
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
